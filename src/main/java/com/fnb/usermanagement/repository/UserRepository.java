@@ -7,5 +7,5 @@ import com.fnb.usermanagement.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    
+    User findByEmail(String email);
 }

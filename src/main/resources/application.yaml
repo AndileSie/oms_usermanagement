@@ -1,13 +1,24 @@
 spring:
   application:
     name: usermanagement
+  datasource:
+    url: jdbc:mysql://localhost:3306
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jwt:
+    secret: adasdsadsadsadasdasdasdasdasdasdsadsa
+    expiration-ms: 360000
 
+
+
+    
 server:
   port: 8089
 
-datasource:
-  url: jdbc:mysql://localhost:3306/usermanagement?useSSL=false&serverTimezone=UTC
-  username: root
-  password: root
-  driver-class-name: com.mysql.cj.jdbc.Driver
+
 
