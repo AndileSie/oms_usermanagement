@@ -1,5 +1,7 @@
 package com.fnb.usermanagement.service.serviceImp;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ public class AuthServiceImp implements AuthService {
     private  final UserCredentialsRepository userCredentialsRepository;
     private  final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private  final AuthenticationManager authenticationManager;
     @Override
     @Transactional 
     public UserResponse regitserUser(RegisterRequest request) {
@@ -51,6 +54,8 @@ public class AuthServiceImp implements AuthService {
         if (user == null) {
             return  null;
         }
+
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
         String token = jwtService.generateToken(user);
 
         return LoginResponse.builder()
